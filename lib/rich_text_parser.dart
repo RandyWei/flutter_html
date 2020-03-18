@@ -157,6 +157,7 @@ class HtmlRichTextParser extends StatelessWidget {
     this.customTextStyle,
     this.customTextAlign,
     this.onImageError,
+    this.onImageLoaded,
     this.linkStyle = const TextStyle(
       decoration: TextDecoration.underline,
       color: Colors.blueAccent,
@@ -177,6 +178,7 @@ class HtmlRichTextParser extends StatelessWidget {
   final CustomTextStyle customTextStyle;
   final CustomTextAlign customTextAlign;
   final ImageErrorListener onImageError;
+  final Function onImageLoaded;
   final TextStyle linkStyle;
   final ImageProperties imageProperties;
   final OnImageTap onImageTap;
@@ -788,7 +790,8 @@ class HtmlRichTextParser extends StatelessWidget {
                     },
                   ));
                 } else if (node.attributes['src'].startsWith('asset:')) {
-                  final assetPath = node.attributes['src'].replaceFirst('asset:', '');
+                  final assetPath =
+                      node.attributes['src'].replaceFirst('asset:', '');
                   precacheImage(
                     AssetImage(assetPath),
                     buildContext,
@@ -866,6 +869,14 @@ class HtmlRichTextParser extends StatelessWidget {
                           return child;
                         }
                         return Container();
+                      },
+                      loadingBuilder: (
+                        BuildContext context,
+                        Widget child,
+                        ImageChunkEvent loadingProgress,
+                      ) {
+                        if (loadingProgress == null) onImageLoaded?.call();
+                        return child;
                       },
                       width: (width ?? -1) > 0 ? width : null,
                       height: (height ?? -1) > 0 ? height : null,

@@ -22,6 +22,7 @@ class Html extends StatelessWidget {
     this.blockSpacing = 14.0,
     this.useRichText = true,
     this.onImageError,
+    this.onImageLoaded,
     this.linkStyle = const TextStyle(
         decoration: TextDecoration.underline,
         color: Colors.blueAccent,
@@ -41,6 +42,7 @@ class Html extends StatelessWidget {
   final double blockSpacing;
   final bool useRichText;
   final ImageErrorListener onImageError;
+  final Function onImageLoaded;
   final TextStyle linkStyle;
   final bool shrinkToFit;
 
@@ -76,6 +78,7 @@ class Html extends StatelessWidget {
                 customTextAlign: customTextAlign,
                 html: data,
                 onImageError: onImageError,
+                onImageLoaded: onImageLoaded,
                 linkStyle: linkStyle,
                 imageProperties: imageProperties,
                 onImageTap: onImageTap,
