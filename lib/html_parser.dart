@@ -25,6 +25,7 @@ class HtmlParser extends StatelessWidget {
   final OnTap onLinkTap;
   final OnTap onImageTap;
   final ImageErrorListener onImageError;
+  final Function onImageLoaded;
   final bool shrinkWrap;
 
   final Map<String, Style> style;
@@ -36,6 +37,7 @@ class HtmlParser extends StatelessWidget {
     this.onLinkTap,
     this.onImageTap,
     this.onImageError,
+    this.onImageLoaded,
     this.shrinkWrap,
     this.style,
     this.customRender,

@@ -130,6 +130,14 @@ class ImageContentElement extends ReplacedElement {
           }
           return child;
         },
+        loadingBuilder: (
+            _,
+            Widget child,
+            ImageChunkEvent loadingProgress,
+            ) {
+          if (loadingProgress == null) context.parser.onImageLoaded?.call();
+          return child;
+        },
       );
     }
 
